@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: rgb(7, 7, 111);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 100px 0 0 0 ;
+}
+.container{
+    background-color: aliceblue;
+    padding: 25px;
+    height: 400px;
+    width: 400px;
+    border-radius: 20px;
+}
+.options button{
+    display: block;
+}
+h2{
+    margin: 10px 10px 10px 0;
+}
+.questionBox{
+     margin: 10px 10px 10px 0 ;
+}
+.questionBox button{
+    font-size: 13px;
+    padding: 8px;
+    margin: 10px 10px 10px 0 ;
+    width: 100%;
+    text-align: left;
+    background-color: aliceblue;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-weight: 100;
+}
+.questionBox p{
+    font-size: 22px ;
+}
+.next{
+    margin-top: 15px;
+    font-size: 15px;
+    background-color: rgb(3, 3, 58);
+    color: aliceblue;
+    padding: 5px 35px 5px 35px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+.nextdiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
