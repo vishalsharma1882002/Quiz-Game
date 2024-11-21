@@ -1,4 +1,4 @@
-const questions = [
+const allQuestions = [
   {
     question: "What is the largest animal in the world?",
     answers: [
@@ -36,29 +36,53 @@ const questions = [
     ],
   },
 ];
-const question = document.querySelector(".question");
-const options = document.querySelector(".options");
-const nextBtn = document.querySelector(".nextBtn");
+let questionElement = document.querySelector(".questionText");
+let options = document.querySelectorAll(".option");
+let nextBtn = document.querySelector(".next");
+let i = 0;
+let score=0
 
-let currQuestionIndex = 0;
-let score = 0;
-
-function startQuiz() {
-  currQuestionIndex = 0;
-  score = 0;
-  nextBtn.innerHTML = "Next";
-  showQuestion();
-}
-function showQuestion() {
-  let currQuestion = questions[currQuestionIndex];
-  let questionNo = currQuestionIndex + 1;
-  questionElement.innerHTML = questionNo + ". " + currQuestion;
-
-  currQuestion.answers.forEach((answer) => {
-    const button = document.createElement("button");
-    button.innerHTML = answers.text;
-    button.classList.add("btn");
-    options.appendChild(button);
+//loading question
+function loadQuestion() {
+  let currQuestion;
+  currQuestion = allQuestions[i];
+  questionElement.innerHTML = [i+1] + ". " + currQuestion.question;
+  options.forEach((option, index) => {
+    option.innerHTML = currQuestion.answers[index].text;
+    option.dataset.correct = currQuestion.answers[index].correct;
+     // Attach correct info
   });
 }
-startQuiz();
+options.forEach((option)=>{
+  option.addEventListener("click",(e)=>{
+    const isCorrect = e.target.dataset.correct==="true"
+    if(isCorrect){
+      e.target.classList.add("correct") //applyinng correct css properties
+      score++
+    } else{
+      e.target.classList.add("incorrect")
+    }
+    //disable further clicks
+    options.forEach((opt)=>{
+      opt.classList.add("disable")
+    })
+  })
+})
+nextBtn.addEventListener("click",()=>{
+  i++
+  if(i<allQuestions.length){
+    options.forEach((opt)=>{
+      opt.classList.remove("correct","incorrect","disable")
+    })
+    loadQuestion();
+  }
+  else{
+    questionElement.innerHTML="Quiz is Completed!"+" Your Score is " + score + "/" + allQuestions.length
+    options.forEach((opt)=>{
+      opt.style.display="none"
+      nextBtn.style.display="none"
+    })
+  }
+
+})
+loadQuestion();
